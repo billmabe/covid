@@ -3,8 +3,8 @@ Cleaning the NY Times COVID-19 data to create daily time series
 
 
 This script produces two csv files
-1. US county -- daily COVID-19 case counts
-2. US state -- daily COVID-19 case counts
+1. US county -- daily COVID-19 case counts (https://raw.githubusercontent.com/billmabe/covid/master/county_data.csv)
+2. US state -- daily COVID-19 case counts ()
 
 To that end, the script, 
 - reads in state and country data files from the NY Times' GitHub repo
