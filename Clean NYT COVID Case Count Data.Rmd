@@ -191,7 +191,9 @@ state_data <- state_complete %>%
 # Write csv files to save
 
 ```{r}
-write.csv(county_data, file = "~/Documents/GitHub/covid/country_data.csv", row.names = FALSE)
+write.csv(county_data, file = "~/Documents/GitHub/covid/county_data.csv", row.names = FALSE)
 write.csv(state_data, file = "~/Documents/GitHub/covid/state_data.csv", row.names = FALSE)
+write.csv(county_data, file = "~/Documents/Projects/covid/county_data.csv", row.names = FALSE)
+write.csv(state_data, file = "~/Documents/Projects/covid/state_data.csv", row.names = FALSE)
 ```
 

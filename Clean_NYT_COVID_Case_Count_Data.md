@@ -161,7 +161,7 @@ table(county_distinct_cumul$cases_is_cumulative)
 
     ## 
     ##     0     1 
-    ##   453 42799
+    ##   533 47943
 
 ``` r
 table(county_distinct_cumul$dth_is_cumulative)
@@ -169,7 +169,7 @@ table(county_distinct_cumul$dth_is_cumulative)
 
     ## 
     ##     0     1 
-    ##   110 43142
+    ##   133 48343
 
 #### 2\. State Data
 
@@ -186,7 +186,7 @@ table(state_distinct_cumul$cases_is_cumulative)
 
     ## 
     ##    1 
-    ## 2049
+    ## 2161
 
 ``` r
 table(state_distinct_cumul$dth_is_cumulative)
@@ -194,7 +194,7 @@ table(state_distinct_cumul$dth_is_cumulative)
 
     ## 
     ##    0    1 
-    ##    1 2048
+    ##    2 2159
 
 The tables show that in both data sets, the cases and deaths variables
 are cumulative counts. In a very small number of cases, however, the
@@ -268,7 +268,7 @@ table(gaps1$no_gap)
 
     ## 
     ##     1 
-    ## 43370
+    ## 48635
 
 ``` r
 gaps2 <- state_complete %>% 
@@ -279,7 +279,7 @@ table(gaps2$no_gap)
 
     ## 
     ##    1 
-    ## 2049
+    ## 2161
 
 If they all equal 1 means there are no gaps in the time series.
 
@@ -329,6 +329,8 @@ state_data <- state_complete %>%
 # Write csv files to save
 
 ``` r
-write.csv(county_data, file = "~/Documents/Projects/covid_new/country_data.csv", row.names = FALSE)
-write.csv(state_data, file = "~/Documents/Projects/covid_new/state_data.csv", row.names = FALSE)
+write.csv(county_data, file = "~/Documents/GitHub/covid/county_data.csv", row.names = FALSE)
+write.csv(state_data, file = "~/Documents/GitHub/covid/state_data.csv", row.names = FALSE)
+write.csv(county_data, file = "~/Documents/Projects/covid/county_data.csv", row.names = FALSE)
+write.csv(state_data, file = "~/Documents/Projects/covid/state_data.csv", row.names = FALSE)
 ```
