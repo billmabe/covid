@@ -194,7 +194,7 @@ state_data <- state_complete %>%
 ```{r}
 write.csv(county_data, file = here("county_data.csv"), row.names = FALSE)
 write.csv(state_data, file = here("state_data.csv"), row.names = FALSE)
-write.csv(county_data, file = "~/Documents/Projects/covid/county_data.csv", row.names = FALSE)
-write.csv(state_data, file = "~/Documents/Projects/covid/state_data.csv", row.names = FALSE)
+write.csv(county_data, file = "~/Documents/Projects/covid_app/county_data.csv", row.names = FALSE)
+write.csv(state_data, file = "~/Documents/Projects/covid_app/state_data.csv", row.names = FALSE)
 ```
 
