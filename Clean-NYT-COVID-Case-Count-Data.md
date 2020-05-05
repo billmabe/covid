@@ -121,6 +121,32 @@ state_dat <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/m
     ##   deaths = col_double()
     ## )
 
+``` r
+tests <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/testing/covid-testing-latest-data-source-details.csv")
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   Entity = col_character(),
+    ##   Date = col_date(format = ""),
+    ##   `Source URL` = col_character(),
+    ##   `Source label` = col_character(),
+    ##   Notes = col_character(),
+    ##   `Number of observations` = col_double(),
+    ##   `Cumulative total` = col_double(),
+    ##   `Cumulative total per thousand` = col_double(),
+    ##   `Daily change in cumulative total` = col_double(),
+    ##   `Daily change in cumulative total per thousand` = col_double(),
+    ##   `3-day rolling mean daily change` = col_double(),
+    ##   `3-day rolling mean daily change per thousand` = col_double(),
+    ##   `7-day rolling mean daily change` = col_double(),
+    ##   `7-day rolling mean daily change per thousand` = col_double(),
+    ##   `General source label` = col_character(),
+    ##   `General source URL` = col_character(),
+    ##   `Short description` = col_character(),
+    ##   `Detailed description` = col_character()
+    ## )
+
 ## B. FIND AND REMOVE DUPLICATE RECORDS (IF THERE ARE ANY)
 
 ``` r
@@ -338,6 +364,12 @@ state_data <- state_complete %>%
                        deaths = cumulative_deaths - lag(cumulative_deaths))
 ```
 
+# TESTING DATA
+
+``` r
+test_output <- tests %>% arrange(desc(`Cumulative total per thousand`)) %>% select(Entity, `Cumulative total per thousand`, `Cumulative total`)
+```
+
 # Write csv files to save
 
 ``` r
@@ -345,4 +377,6 @@ write.csv(county_data, file = here("county_data.csv"), row.names = FALSE)
 write.csv(state_data, file = here("state_data.csv"), row.names = FALSE)
 write.csv(county_data, file = "~/Documents/Projects/covid_app/county_data.csv", row.names = FALSE)
 write.csv(state_data, file = "~/Documents/Projects/covid_app/state_data.csv", row.names = FALSE)
+write.csv(test_output, file = here("test_output.csv"), row.names = FALSE)
+write.csv(test_output, file = "~/Documents/Projects/covid_app/test_output.csv", row.names = FALSE)
 ```
