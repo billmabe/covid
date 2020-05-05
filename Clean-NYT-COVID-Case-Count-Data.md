@@ -199,7 +199,7 @@ table(county_distinct_cumul$cases_is_cumulative)
 
     ## 
     ##      0      1 
-    ##   1755 107903
+    ##   1832 110704
 
 ``` r
 table(county_distinct_cumul$dth_is_cumulative)
@@ -207,7 +207,7 @@ table(county_distinct_cumul$dth_is_cumulative)
 
     ## 
     ##      0      1 
-    ##    386 109272
+    ##    393 112143
 
 #### 2\. State Data
 
@@ -224,7 +224,7 @@ table(state_distinct_cumul$cases_is_cumulative)
 
     ## 
     ##    0    1 
-    ##    3 3366
+    ##    4 3420
 
 ``` r
 table(state_distinct_cumul$dth_is_cumulative)
@@ -232,7 +232,7 @@ table(state_distinct_cumul$dth_is_cumulative)
 
     ## 
     ##    0    1 
-    ##    5 3364
+    ##    5 3419
 
 The tables show that in both data sets, the cases and deaths variables
 are cumulative counts. In a very small number of cases, however, the
@@ -306,7 +306,7 @@ table(gaps1$no_gap)
 
     ## 
     ##      1 
-    ## 110069
+    ## 112952
 
 ``` r
 gaps2 <- state_complete %>% 
@@ -317,7 +317,7 @@ table(gaps2$no_gap)
 
     ## 
     ##    1 
-    ## 3369
+    ## 3424
 
 If they all equal 1 means there are no gaps in the time series.
 
