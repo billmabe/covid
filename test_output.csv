@@ -1,89 +1,82 @@
-"Entity","Cumulative total per thousand","Cumulative total"
-"Iceland - samples",150.341,51304
-"Bahrain - units unclear",91.386,155501
-"Luxembourg - people tested",78.755,49299
-"Lithuania - samples tested",54.772,149106
-"Israel - tests performed",47.775,413517
-"Portugal - samples tested",44.971,458553
-"Denmark - People tested",44.497,257738
-"Ireland - units unclear",43.493,214761
-"Estonia - tests performed",43.288,57423
-"Qatar - people tested",38.098,109762
-"Italy - tests performed",37.158,2246666
-"Latvia - tests performed",35.07,66150
-"Norway - people tested",34.984,189657
-"Switzerland - tests performed",33.093,286403
-"New Zealand - tests performed",32.335,155928
-"Belgium - units unclear",32.154,372654
-"Austria - tests performed",31.742,285883
-"Russia - tests performed",30.564,4460357
-"Germany - tests performed",30.4,2547052
-"Spain - tests performed",28.898,1351130
-"Slovenia - tests performed",27.646,57474
-"Australia - tests performed",26.069,664756
-"Czech Republic - tests performed",25.128,269093
-"Italy - people tested",25.01,1512121
-"Canada - people tested",24.921,940567
-"Singapore - swabs tested",24.6,143919
-"Belarus - tests performed",22.369,211369
-"United States - inconsistent units (COVID Tracking Project)",22.009,7285178
-"Hong Kong - tests performed",20.674,154989
-"United Kingdom - tests performed",20.385,1383842
-"Finland - samples tested",19.18,106272
-"Slovakia - tests performed",18.291,99864
-"Singapore - people tested",17.081,99929
-"Kazakhstan - tests performed",17.064,320411
-"Serbia - people tested",16.353,111278
-"United Kingdom - people tested",14.954,1015138
-"Sweden - people tested",14.704,148500
-"Turkey - tests performed",14.281,1204421
-"Netherlands - people tested",13.768,235909
-"South Korea - cases tested",12.488,640237
-"Peru - units unclear",12.331,406579
-"Chile - tests performed",11.618,222095
-"France - tests performed",11.101,724574
-"Poland - samples tested",10.418,394270
-"Romania - tests performed",10.348,199068
-"Croatia - units unclear",9.737,39973
-"Hungary - tests performed",8.857,85557
-"Panama - units unclear",8.241,35556
-"Greece - tests performed",7.767,80951
-"Bulgaria - tests performed",7.239,50303
-"Malaysia - cases tested",6.588,213220
-"Uruguay - tests performed",6.565,22805
-"Iran - tests performed",6.186,519543
-"Cuba - tests performed",5.095,57711
-"El Salvador - tests performed",4.938,32030
-"South Africa - units unclear",4.342,257541
-"Ghana - units unclear",4.166,129461
-"Ecuador - samples tested",3.75,66160
-"Ukraine - units unclear",3.196,139759
-"Taiwan - tests performed",2.727,64958
-"Vietnam - units unclear",2.681,261004
-"Colombia - samples processed",2.418,123029
-"Japan - tests performed",2.24,283306
-"Rwanda - units unclear",2.22,28754
-"Tunisia - units unclear",2.103,24853
-"Costa Rica - people tested",1.942,9892
-"United States - specimens tested (CDC)",1.76,582512
-"Paraguay - samples tested",1.668,11898
-"Japan - people tested",1.473,186343
-"Argentina - tests performed",1.298,58685
-"Thailand - people tested",1.184,82627
-"Philippines - people tested",1.091,119512
-"Pakistan - tests performed",1.007,222404
-"Morocco - people tested",1.003,37006
-"Senegal - tests performed",0.972,16279
-"Uganda - samples tested",0.906,41462
-"Zimbabwe - tests performed",0.897,13329
-"India - samples tested",0.864,1191946
-"Mexico - cases tested",0.674,86898
-"Bolivia - cases tested",0.665,7767
-"Bangladesh - samples tested",0.567,93403
-"Kenya - units unclear",0.481,25869
-"Nepal - people tested",0.468,13640
-"India - people tested",0.381,525667
-"Indonesia - people tested",0.325,88924
-"Ethiopia - tests performed",0.21,24088
-"Myanmar - samples tested",0.166,9038
-"Nigeria - samples tested",0.095,19512
+"Country","Test Units","Date","Cumulative total per thousand","Cumulative total","Log Tests per 1,000","country","latitude","longitude"
+"Iceland","samples",2020-05-04,150.341,51304,5.01290604731693,"IS",64.963051,-19.020835
+"Bahrain","units unclear",2020-05-05,91.386,155501,4.51509229386142,"BH",25.930414,50.637772
+"Luxembourg","people tested",2020-05-05,78.755,49299,4.3663417677537,"LU",49.815273,6.129583
+"Lithuania","samples tested",2020-05-05,54.772,149106,4.00317911446999,"LT",55.169438,23.881275
+"Israel","tests performed",2020-05-05,47.775,413517,3.86650249012634,"IL",31.046051,34.851612
+"Portugal","samples tested",2020-05-03,44.971,458553,3.8060178375823,"PT",39.399872,-8.224454
+"Denmark","People tested",2020-05-05,44.497,257738,3.79542177116931,"DK",56.26392,9.501785
+"Ireland","units unclear",2020-05-05,43.493,214761,3.77260000560547,"IE",53.41291,-8.24389
+"Estonia","tests performed",2020-05-04,43.288,57423,3.76787546034043,"EE",58.595272,25.013607
+"Qatar","people tested",2020-05-05,38.098,109762,3.64016178731651,"QA",25.354826,51.183884
+"Italy","tests performed",2020-05-05,37.158,2246666,3.61517909118398,"IT",41.87194,12.56738
+"Latvia","tests performed",2020-05-05,35.07,66150,3.55734606415209,"LV",56.879635,24.603189
+"Norway","people tested",2020-05-05,34.984,189657,3.55489081411062,"NO",60.472024,8.468946
+"Switzerland","tests performed",2020-05-04,33.093,286403,3.49932177965535,"CH",46.818188,8.227512
+"New Zealand","tests performed",2020-05-04,32.335,155928,3.47615023489856,"NZ",-40.900557,174.885971
+"Belgium","units unclear",2020-05-03,32.154,372654,3.47053685974077,"BE",50.503887,4.469936
+"Austria","tests performed",2020-05-05,31.742,285883,3.45764072508537,"AT",47.516231,14.550072
+"Russia","tests performed",2020-05-05,30.564,4460357,3.41982284578532,"RU",61.52401,105.318756
+"Germany","tests performed",2020-04-26,30.4,2547052,3.41444260841218,"DE",51.165691,10.451526
+"Spain","tests performed",2020-04-30,28.898,1351130,3.36377238857142,"ES",40.463667,-3.74922
+"Slovenia","tests performed",2020-05-04,27.646,57474,3.31948105204217,"SI",46.151241,14.995463
+"Australia","tests performed",2020-05-05,26.069,664756,3.26074686894351,"AU",-25.274398,133.775136
+"Czech Republic","tests performed",2020-05-04,25.128,269093,3.22398276223635,"CZ",49.817492,15.472962
+"Canada","people tested",2020-05-05,24.921,940567,3.21571082152504,"CA",56.130366,-106.346771
+"Singapore","swabs tested",2020-04-27,24.6,143919,3.20274644293832,"SG",1.352083,103.819836
+"Belarus","tests performed",2020-05-04,22.369,211369,3.10767607177598,"BY",53.709807,27.953389
+"United States","inconsistent units (COVID Tracking Project)",2020-05-04,22.009,7285178,3.09145146061253,"US",37.09024,-95.712891
+"Hong Kong","tests performed",2020-04-27,20.674,154989,3.02887687214629,"HK",22.396428,114.109497
+"United Kingdom","tests performed",2020-05-05,20.385,1383842,3.01479933627122,"GB",55.378051,-3.435973
+"Finland","samples tested",2020-05-04,19.18,106272,2.95386806945529,"FI",61.92411,25.748151
+"Slovakia","tests performed",2020-05-05,18.291,99864,2.90640913559379,"SK",48.669026,19.699024
+"Kazakhstan","tests performed",2020-05-05,17.064,320411,2.83697098116905,"KZ",48.019573,66.923684
+"Serbia","people tested",2020-05-05,16.353,111278,2.79441136675025,"RS",44.016521,21.005859
+"Sweden","people tested",2020-05-03,14.704,148500,2.68811956561333,"SE",60.128161,18.643501
+"Turkey","tests performed",2020-05-05,14.281,1204421,2.6589299824708,"TR",38.963745,35.243322
+"Netherlands","people tested",2020-05-03,13.768,235909,2.62234705890924,"NL",52.132633,5.291266
+"South Korea","cases tested",2020-05-05,12.488,640237,2.52476818321313,"KR",35.907757,127.766922
+"Peru","units unclear",2020-05-05,12.331,406579,2.51211641688839,"PE",-9.189967,-75.015152
+"Chile","tests performed",2020-05-05,11.618,222095,2.45255561957034,"CL",-35.675147,-71.542969
+"France","tests performed",2020-04-28,11.101,724574,2.40703519435051,"FR",46.227638,2.213749
+"Poland","samples tested",2020-05-05,10.418,394270,2.343535079323,"PL",51.919438,19.145136
+"Romania","tests performed",2020-05-04,10.348,199068,2.33679326432378,"RO",45.943161,24.96676
+"Croatia","units unclear",2020-05-05,9.737,39973,2.27593306199662,"HR",45.1,15.2
+"Hungary","tests performed",2020-05-05,8.857,85557,2.18120810682745,"HU",47.162494,19.503304
+"Panama","units unclear",2020-05-04,8.241,35556,2.10912169578125,"PA",8.537981,-80.782127
+"Greece","tests performed",2020-05-04,7.767,80951,2.04988398943751,"GR",39.074208,21.824312
+"Bulgaria","tests performed",2020-05-05,7.239,50303,1.979483075311,"BG",42.733883,25.48583
+"Malaysia","cases tested",2020-05-05,6.588,213220,1.88524981231539,"MY",4.210484,101.975766
+"Uruguay","tests performed",2020-05-05,6.565,22805,1.88175250775476,"UY",-32.522779,-55.765835
+"Iran","tests performed",2020-05-05,6.186,519543,1.82228867426288,"IR",32.427908,53.688046
+"Cuba","tests performed",2020-05-04,5.095,57711,1.62825966667469,"CU",21.521757,-77.781167
+"El Salvador","tests performed",2020-05-04,4.938,32030,1.59696039092299,"SV",13.794185,-88.89653
+"South Africa","units unclear",2020-05-04,4.342,257541,1.4683350714561,"ZA",-30.559482,22.937506
+"Ghana","units unclear",2020-05-02,4.166,129461,1.42695634283878,"GH",7.946527,-1.023194
+"Ecuador","samples tested",2020-05-04,3.75,66160,1.32175583998232,"EC",-1.831239,-78.183406
+"Ukraine","units unclear",2020-05-05,3.196,139759,1.16190002790403,"UA",48.379433,31.16558
+"Taiwan","tests performed",2020-05-04,2.727,64958,1.00320210386345,"TW",23.69781,120.960515
+"Vietnam","units unclear",2020-04-29,2.681,261004,0.986189859253822,"VN",14.058324,108.277199
+"Colombia","samples processed",2020-05-04,2.418,123029,0.882940752192601,"CO",4.570868,-74.297333
+"Japan","tests performed",2020-05-03,2.24,283306,0.806475865866949,"JP",36.204824,138.252924
+"Rwanda","units unclear",2020-05-03,2.22,28754,0.797507195884188,"RW",-1.940278,29.873888
+"Tunisia","units unclear",2020-05-03,2.103,24853,0.743364896720563,"TN",33.886917,9.537499
+"Costa Rica","people tested",2020-05-05,1.942,9892,0.663718369869133,"CR",9.748917,-83.753428
+"Paraguay","samples tested",2020-05-05,1.668,11898,0.511625303936555,"PY",-23.442503,-58.443832
+"Argentina","tests performed",2020-05-01,1.298,58685,0.260824618281898,"AR",-38.416097,-63.616672
+"Thailand","people tested",2020-05-05,1.184,82627,0.168898536461814,"TH",15.870032,100.992541
+"Philippines","people tested",2020-05-04,1.091,119512,0.0870947068509337,"PH",12.879721,121.774017
+"Pakistan","tests performed",2020-05-05,1.007,222404,0.00697561373642514,"PK",30.375321,69.345116
+"Morocco","people tested",2020-05-01,1.003,37006,0.00299550897979837,"MA",31.791702,-7.09262
+"Senegal","tests performed",2020-05-05,0.972,16279,-0.028399474521698,"SN",14.497401,-14.452362
+"Uganda","samples tested",2020-05-04,0.906,41462,-0.0987159729391577,"UG",1.373333,32.290275
+"Zimbabwe","tests performed",2020-05-04,0.897,13329,-0.108699416923341,"ZW",-19.015438,29.154857
+"India","samples tested",2020-05-05,0.864,1191946,-0.146182510178081,"IN",20.593684,78.96288
+"Mexico","cases tested",2020-05-04,0.674,86898,-0.39452516806983,"MX",23.634501,-102.552784
+"Bolivia","cases tested",2020-05-04,0.665,7767,-0.407968238326283,"BO",-16.290154,-63.588653
+"Bangladesh","samples tested",2020-05-05,0.567,93403,-0.567395975254385,"BD",23.684994,90.356331
+"Kenya","units unclear",2020-05-05,0.481,25869,-0.731888008876376,"KE",-0.023559,37.906193
+"Nepal","people tested",2020-05-04,0.468,13640,-0.75928698306449,"NP",28.394857,84.124008
+"Indonesia","people tested",2020-05-05,0.325,88924,-1.1239300966524,"ID",-0.789275,113.921327
+"Ethiopia","tests performed",2020-05-04,0.21,24088,-1.56064774826467,"ET",9.145,40.489673
+"Nigeria","samples tested",2020-05-05,0.095,19512,-2.3538783873816,"NG",9.081999,8.675277

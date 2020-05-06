@@ -3,6 +3,10 @@ Cleaning the NY Times COVID-19 Case Count Data
 Bill Mabe
 April 10, 2020
 
+``` r
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # PURPOSE
 
 The purpose of this script is to produce two working data frames: 1. US
@@ -93,6 +97,59 @@ require(here)
     ## Loading required package: here
 
     ## here() starts at /Users/billmabe/Documents/GitHub/covid
+
+``` r
+require(stringr)
+```
+
+    ## Loading required package: stringr
+
+``` r
+require(purrr)
+```
+
+    ## Loading required package: purrr
+
+    ## 
+    ## Attaching package: 'purrr'
+
+    ## The following objects are masked from 'package:rlang':
+    ## 
+    ##     %@%, as_function, flatten, flatten_chr, flatten_dbl, flatten_int,
+    ##     flatten_lgl, flatten_raw, invoke, list_along, modify, prepend,
+    ##     splice
+
+``` r
+require(rvest)
+```
+
+    ## Loading required package: rvest
+
+    ## Loading required package: xml2
+
+    ## 
+    ## Attaching package: 'xml2'
+
+    ## The following object is masked from 'package:rlang':
+    ## 
+    ##     as_list
+
+    ## 
+    ## Attaching package: 'rvest'
+
+    ## The following object is masked from 'package:purrr':
+    ## 
+    ##     pluck
+
+    ## The following object is masked from 'package:readr':
+    ## 
+    ##     guess_encoding
+
+``` r
+require(leaflet)
+```
+
+    ## Loading required package: leaflet
 
 ``` r
 county_dat <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
@@ -292,8 +349,11 @@ state_distinct_rev <- state_distinct_cumul %>%
 #### Complete the time series using `tidyr::complete`
 
 ``` r
-county_complete <- county_distinct_rev %>% complete(nesting(state, county), date = seq(min(date), max(date), by = "day"))
-state_complete <- state_distinct_rev %>% complete(nesting(state), date = seq(min(date), max(date), by = "day"))
+county_complete <- county_distinct_rev %>% 
+  complete(nesting(state, county), date = seq(min(date), max(date), by = "day"))
+
+state_complete <- state_distinct_rev %>% 
+  complete(nesting(state), date = seq(min(date), max(date), by = "day"))
 ```
 
 #### See if there are any gaps left in the time series
@@ -368,8 +428,172 @@ state_data <- state_complete %>%
 # TESTING DATA
 
 ``` r
-test_output <- tests %>% arrange(desc(`Cumulative total per thousand`)) %>% select(Entity, `Cumulative total per thousand`, `Cumulative total`)
+l <- str_split(tests$Entity, " - ")
+tests <- tests %>% mutate(Country = map_chr(l, function(x) x[1]),
+                          `Test Units` = map_chr(l, function(x) x[2])
+                          ) %>%
+                   arrange(Country, desc(`Cumulative total`)) %>%
+                   group_by(Country) %>%
+                   slice(1:1)
+  
+test_output <- tests %>% 
+  arrange(desc(`Cumulative total per thousand`)) %>% 
+  select(Country, `Test Units`, `Cumulative total per thousand`, `Cumulative total`)
+nrow(test_output)
 ```
+
+    ## [1] 82
+
+# LATITUDE / LONGITUDE DATA
+
+``` r
+countries_url <- "https://developers.google.com/public-data/docs/canonical/countries_csv"
+ctries <- read_html(countries_url)
+
+# Read data from table
+ctry_table <- html_nodes(ctries, "table td") %>%
+  html_text()
+
+# Create tibble
+country_df <- as_tibble(matrix(ctry_table, ncol = 4, byrow = TRUE), .name_repair = "universal")
+```
+
+    ## New names:
+    ## * `` -> ...1
+    ## * `` -> ...2
+    ## * `` -> ...3
+    ## * `` -> ...4
+
+``` r
+# Pull column names from Google
+nms <- html_nodes(ctries, "table") %>%
+       html_text()
+names(country_df) <- str_trim(str_split(nms, "\n")[[1]][1:4])
+
+# Convert lat / lon from char to numeric
+country_df <- country_df %>% mutate(latitude = as.numeric(latitude),
+                                    longitude = as.numeric(longitude)
+                                    )
+country_df
+```
+
+    ## # A tibble: 245 x 4
+    ##    country latitude longitude name                
+    ##    <chr>      <dbl>     <dbl> <chr>               
+    ##  1 AD          42.5    1.60   Andorra             
+    ##  2 AE          23.4   53.8    United Arab Emirates
+    ##  3 AF          33.9   67.7    Afghanistan         
+    ##  4 AG          17.1  -61.8    Antigua and Barbuda 
+    ##  5 AI          18.2  -63.1    Anguilla            
+    ##  6 AL          41.2   20.2    Albania             
+    ##  7 AM          40.1   45.0    Armenia             
+    ##  8 AN          12.2  -69.1    Netherlands Antilles
+    ##  9 AO         -11.2   17.9    Angola              
+    ## 10 AQ         -75.3   -0.0714 Antarctica          
+    ## # … with 235 more rows
+
+# Join Testing Data with Lat Lon Data
+
+``` r
+test_loc <- inner_join(test_output, country_df, by = c("Country" = "name"))
+str(test_loc)
+```
+
+    ## tibble [81 × 7] (S3: grouped_df/tbl_df/tbl/data.frame)
+    ##  $ Country                      : chr [1:81] "Iceland" "Bahrain" "Luxembourg" "Lithuania" ...
+    ##  $ Test Units                   : chr [1:81] "samples" "units unclear" "people tested" "samples tested" ...
+    ##  $ Cumulative total per thousand: num [1:81] 150.3 91.4 78.8 54.8 47.8 ...
+    ##  $ Cumulative total             : num [1:81] 51304 155501 49299 149106 413517 ...
+    ##  $ country                      : chr [1:81] "IS" "BH" "LU" "LT" ...
+    ##  $ latitude                     : num [1:81] 65 25.9 49.8 55.2 31 ...
+    ##  $ longitude                    : num [1:81] -19.02 50.64 6.13 23.88 34.85 ...
+    ##  - attr(*, "groups")= tibble [81 × 2] (S3: tbl_df/tbl/data.frame)
+    ##   ..$ Country: chr [1:81] "Argentina" "Australia" "Austria" "Bahrain" ...
+    ##   ..$ .rows  :List of 81
+    ##   .. ..$ : int 65
+    ##   .. ..$ : int 22
+    ##   .. ..$ : int 17
+    ##   .. ..$ : int 2
+    ##   .. ..$ : int 76
+    ##   .. ..$ : int 26
+    ##   .. ..$ : int 16
+    ##   .. ..$ : int 75
+    ##   .. ..$ : int 47
+    ##   .. ..$ : int 24
+    ##   .. ..$ : int 39
+    ##   .. ..$ : int 59
+    ##   .. ..$ : int 63
+    ##   .. ..$ : int 43
+    ##   .. ..$ : int 51
+    ##   .. ..$ : int 23
+    ##   .. ..$ : int 7
+    ##   .. ..$ : int 55
+    ##   .. ..$ : int 52
+    ##   .. ..$ : int 9
+    ##   .. ..$ : int 80
+    ##   .. ..$ : int 30
+    ##   .. ..$ : int 40
+    ##   .. ..$ : int 19
+    ##   .. ..$ : int 54
+    ##   .. ..$ : int 46
+    ##   .. ..$ : int 28
+    ##   .. ..$ : int 44
+    ##   .. ..$ : int 1
+    ##   .. ..$ : int 73
+    ##   .. ..$ : int 79
+    ##   .. ..$ : int 50
+    ##   .. ..$ : int 8
+    ##   .. ..$ : int 5
+    ##   .. ..$ : int 11
+    ##   .. ..$ : int 60
+    ##   .. ..$ : int 32
+    ##   .. ..$ : int 77
+    ##   .. ..$ : int 12
+    ##   .. ..$ : int 4
+    ##   .. ..$ : int 3
+    ##   .. ..$ : int 48
+    ##   .. ..$ : int 74
+    ##   .. ..$ : int 69
+    ##   .. ..$ : int 78
+    ##   .. ..$ : int 36
+    ##   .. ..$ : int 15
+    ##   .. ..$ : int 81
+    ##   .. ..$ : int 13
+    ##   .. ..$ : int 68
+    ##   .. ..$ : int 45
+    ##   .. ..$ : int 64
+    ##   .. ..$ : int 38
+    ##   .. ..$ : int 67
+    ##   .. ..$ : int 41
+    ##   .. ..$ : int 6
+    ##   .. ..$ : int 10
+    ##   .. ..$ : int 42
+    ##   .. ..$ : int 18
+    ##   .. ..$ : int 61
+    ##   .. ..$ : int 70
+    ##   .. ..$ : int 33
+    ##   .. ..$ : int 25
+    ##   .. ..$ : int 31
+    ##   .. ..$ : int 21
+    ##   .. ..$ : int 53
+    ##   .. ..$ : int 37
+    ##   .. ..$ : int 20
+    ##   .. ..$ : int 34
+    ##   .. ..$ : int 14
+    ##   .. ..$ : int 57
+    ##   .. ..$ : int 66
+    ##   .. ..$ : int 62
+    ##   .. ..$ : int 35
+    ##   .. ..$ : int 71
+    ##   .. ..$ : int 56
+    ##   .. ..$ : int 29
+    ##   .. ..$ : int 27
+    ##   .. ..$ : int 49
+    ##   .. ..$ : int 58
+    ##   .. ..$ : int 72
+    ##   ..- attr(*, ".drop")= logi TRUE
+
+# Draw Map of Cumulative Tests
 
 # Write csv files to save
 
@@ -378,6 +602,6 @@ write.csv(county_data, file = here("county_data.csv"), row.names = FALSE)
 write.csv(state_data, file = here("state_data.csv"), row.names = FALSE)
 write.csv(county_data, file = "~/Documents/Projects/covid_app/county_data.csv", row.names = FALSE)
 write.csv(state_data, file = "~/Documents/Projects/covid_app/state_data.csv", row.names = FALSE)
-write.csv(test_output, file = here("test_output.csv"), row.names = FALSE)
-write.csv(test_output, file = "~/Documents/Projects/covid_app/test_output.csv", row.names = FALSE)
+write.csv(test_loc, file = here("test_output.csv"), row.names = FALSE)
+write.csv(test_loc, file = "~/Documents/Projects/covid_app/test_output.csv", row.names = FALSE)
 ```

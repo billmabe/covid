@@ -2,10 +2,10 @@
 title: "Cleaning the NY Times COVID-19 Case Count Data"
 author: "Bill Mabe"
 date: "April 10, 2020"
-output: github_document
+output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -35,6 +35,10 @@ require(lubridate)
 require(parsedate)
 require(rlang)
 require(here)
+require(stringr)
+require(purrr)
+require(rvest)
+require(leaflet)
 
 county_dat <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
 state_dat <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
@@ -129,8 +133,11 @@ state_distinct_rev <- state_distinct_cumul %>%
 #### Complete the time series using `tidyr::complete`
 
 ```{r}
-county_complete <- county_distinct_rev %>% complete(nesting(state, county), date = seq(min(date), max(date), by = "day"))
-state_complete <- state_distinct_rev %>% complete(nesting(state), date = seq(min(date), max(date), by = "day"))
+county_complete <- county_distinct_rev %>% 
+  complete(nesting(state, county), date = seq(min(date), max(date), by = "day"))
+
+state_complete <- state_distinct_rev %>% 
+  complete(nesting(state), date = seq(min(date), max(date), by = "day"))
 ```
 
 #### See if there are any gaps left in the time series
@@ -193,7 +200,89 @@ state_data <- state_complete %>%
 # TESTING DATA
 
 ```{r}
-test_output <- tests %>% arrange(desc(`Cumulative total per thousand`)) %>% select(Entity, `Cumulative total per thousand`, `Cumulative total`)
+l <- str_split(tests$Entity, " - ")
+tests <- tests %>% mutate(Country = map_chr(l, function(x) x[1]),
+                          `Test Units` = map_chr(l, function(x) x[2]),
+                          `Log Tests per 1,000` = log(`Cumulative total per thousand`)
+                          ) %>%
+                   arrange(Country, desc(`Cumulative total`)) %>%
+                   group_by(Country) %>%
+                   slice(1:1)
+  
+test_output <- tests %>% 
+  arrange(desc(`Cumulative total per thousand`)) %>% 
+  select(Country, `Test Units`, Date, `Cumulative total per thousand`, `Cumulative total`, `Log Tests per 1,000`)
+nrow(test_output)
+```
+
+# LATITUDE / LONGITUDE DATA
+
+```{r}
+countries_url <- "https://developers.google.com/public-data/docs/canonical/countries_csv"
+ctries <- read_html(countries_url)
+
+# Read data from table
+ctry_table <- html_nodes(ctries, "table td") %>%
+  html_text()
+
+# Create tibble
+country_df <- as_tibble(matrix(ctry_table, ncol = 4, byrow = TRUE), .name_repair = "universal")
+
+# Pull column names from Google
+nms <- html_nodes(ctries, "table") %>%
+       html_text()
+names(country_df) <- str_trim(str_split(nms, "\n")[[1]][1:4])
+
+# Convert lat / lon from char to numeric
+country_df <- country_df %>% mutate(latitude = as.numeric(latitude),
+                                    longitude = as.numeric(longitude)
+                                    )
+# country_df
+```
+
+# Join Testing Data with Lat Lon Data
+
+```{r}
+test_loc <- inner_join(test_output, country_df, by = c("Country" = "name"))
+anti_join(test_output, country_df, by = c("Country" = "name"))
+# Myanmar has a different name across the two data sets. Will fix later.
+
+# nrow(test_loc)
+# nrow(test_output)
+```
+
+# Draw Map of Cumulative Tests
+
+```{r}
+qpal2 <- colorQuantile("Reds", test_loc$`Log Tests per 1,000`, 5)
+
+
+  map = leaflet(test_loc) %>% addTiles() %>%
+    addLegend(values = ~`Cumulative total per thousand`, pal = qpal2, title="Total COVID-19 Tests to Date") %>%
+    addProviderTiles(providers$Stamen.Toner) %>%
+
+#   add circle markers last, so they are on top of the polygons:
+    addCircleMarkers(data = test_loc, 
+                     weight = 10, 
+                     color = ~qpal2(`Log Tests per 1,000`), 
+                     radius = ~`Log Tests per 1,000`, 
+                     opacity = 1, 
+                     fillOpacity = 1, 
+                     ~longitude, 
+                     ~latitude, 
+                    labelOptions = labelOptions(
+                      offset = c(-100,-140),
+                      textOnly = T,
+                      style=list(
+                        'background'='rgba(255,255,255,0.95)',
+                        'border-color' = 'rgba(0,0,0,1)',
+                        'border-radius' = '4px',
+                        'border-style' = 'solid',
+                        'border-width' = '4px'))) %>%
+    setView(lng = -73.93, lat = 40.79, zoom = 1)
+  map
+
+
 ```
 
 # Write csv files to save
@@ -203,7 +292,7 @@ write.csv(county_data, file = here("county_data.csv"), row.names = FALSE)
 write.csv(state_data, file = here("state_data.csv"), row.names = FALSE)
 write.csv(county_data, file = "~/Documents/Projects/covid_app/county_data.csv", row.names = FALSE)
 write.csv(state_data, file = "~/Documents/Projects/covid_app/state_data.csv", row.names = FALSE)
-write.csv(test_output, file = here("test_output.csv"), row.names = FALSE)
-write.csv(test_output, file = "~/Documents/Projects/covid_app/test_output.csv", row.names = FALSE)
+write.csv(test_loc, file = here("test_output.csv"), row.names = FALSE)
+write.csv(test_loc, file = "~/Documents/Projects/covid_app/test_output.csv", row.names = FALSE)
 ```
 
