@@ -20,7 +20,10 @@ For the case count data:
 - Create the daily count variables.
 
 For the testing data:
-The script pulls three variables from the test data gathered by Our World in Data and keeps just three variables:
-- Entity
+The script pulls three variables from the test data gathered by Our World in Data and keeps a few variables:
+- Country
+- Test Type (created from the Entity variable)
 - Cumulative tests
 - Cumulative test per 1,000 population
+- latitude (from Google country data file)
+- longitude (from Google country data file)
