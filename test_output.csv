@@ -1,89 +1,89 @@
 "Entity","Cumulative total per thousand","Cumulative total"
-"Iceland - samples",147.798,50436
-"Bahrain - units unclear",87.91,149586
-"Luxembourg - people tested",77.222,48339
-"Lithuania - samples tested",52.907,144029
-"Israel - tests performed",46.607,403408
-"Denmark - People tested",42.262,244791
-"Estonia - tests performed",42.052,55784
-"Portugal - samples tested",41.86,426836
-"Qatar - people tested",37.068,106795
-"Italy - tests performed",36.244,2191403
-"Latvia - tests performed",34.707,65464
-"Norway - people tested",33.624,182285
-"Switzerland - tests performed",32.669,282742
-"New Zealand - tests performed",31.665,152696
-"Belgium - units unclear",31.198,361573
-"Ireland - units unclear",30.996,153054
-"Austria - tests performed",30.986,279071
+"Iceland - samples",150.341,51304
+"Bahrain - units unclear",91.386,155501
+"Luxembourg - people tested",78.755,49299
+"Lithuania - samples tested",54.772,149106
+"Israel - tests performed",47.775,413517
+"Portugal - samples tested",44.971,458553
+"Denmark - People tested",44.497,257738
+"Ireland - units unclear",43.493,214761
+"Estonia - tests performed",43.288,57423
+"Qatar - people tested",38.098,109762
+"Italy - tests performed",37.158,2246666
+"Latvia - tests performed",35.07,66150
+"Norway - people tested",34.984,189657
+"Switzerland - tests performed",33.093,286403
+"New Zealand - tests performed",32.335,155928
+"Belgium - units unclear",32.154,372654
+"Austria - tests performed",31.742,285883
+"Russia - tests performed",30.564,4460357
 "Germany - tests performed",30.4,2547052
-"Russia - tests performed",29.488,4303243
 "Spain - tests performed",28.898,1351130
-"Slovenia - tests performed",27.002,56136
-"Australia - tests performed",25.499,650214
+"Slovenia - tests performed",27.646,57474
+"Australia - tests performed",26.069,664756
+"Czech Republic - tests performed",25.128,269093
+"Italy - people tested",25.01,1512121
+"Canada - people tested",24.921,940567
 "Singapore - swabs tested",24.6,143919
-"Italy - people tested",24.477,1479910
-"Czech Republic - tests performed",24.423,261548
-"Canada - people tested",24.359,919368
 "Belarus - tests performed",22.369,211369
-"United States - inconsistent units (COVID Tracking Project)",21.309,7053366
+"United States - inconsistent units (COVID Tracking Project)",22.009,7285178
 "Hong Kong - tests performed",20.674,154989
-"United Kingdom - tests performed",19.026,1291591
-"Finland - samples tested",18.67,103445
-"Slovakia - tests performed",17.914,97804
+"United Kingdom - tests performed",20.385,1383842
+"Finland - samples tested",19.18,106272
+"Slovakia - tests performed",18.291,99864
 "Singapore - people tested",17.081,99929
-"Kazakhstan - tests performed",16.343,306861
-"Serbia - people tested",14.977,101911
-"United Kingdom - people tested",13.925,945299
-"Turkey - tests performed",13.886,1171138
+"Kazakhstan - tests performed",17.064,320411
+"Serbia - people tested",16.353,111278
+"United Kingdom - people tested",14.954,1015138
+"Sweden - people tested",14.704,148500
+"Turkey - tests performed",14.281,1204421
 "Netherlands - people tested",13.768,235909
-"South Korea - cases tested",12.365,633921
-"Sweden - people tested",11.803,119200
-"Peru - units unclear",11.692,385492
+"South Korea - cases tested",12.488,640237
+"Peru - units unclear",12.331,406579
+"Chile - tests performed",11.618,222095
 "France - tests performed",11.101,724574
-"Chile - tests performed",10.788,206218
+"Poland - samples tested",10.418,394270
 "Romania - tests performed",10.348,199068
-"Poland - samples tested",10.141,383804
-"Croatia - units unclear",9.51,39040
-"Hungary - tests performed",8.691,83958
-"Panama - units unclear",7.986,34459
+"Croatia - units unclear",9.737,39973
+"Hungary - tests performed",8.857,85557
+"Panama - units unclear",8.241,35556
 "Greece - tests performed",7.767,80951
-"Bulgaria - tests performed",7.073,49145
-"Malaysia - cases tested",6.352,205598
-"Uruguay - tests performed",6.316,21939
-"Iran - tests performed",6.052,508288
-"Cuba - tests performed",4.904,55542
-"El Salvador - tests performed",4.685,30387
-"South Africa - units unclear",4.144,245747
-"Ghana - units unclear",3.767,117049
-"Ecuador - samples tested",3.539,62437
-"Ukraine - units unclear",3.078,134592
-"Taiwan - tests performed",2.705,64436
+"Bulgaria - tests performed",7.239,50303
+"Malaysia - cases tested",6.588,213220
+"Uruguay - tests performed",6.565,22805
+"Iran - tests performed",6.186,519543
+"Cuba - tests performed",5.095,57711
+"El Salvador - tests performed",4.938,32030
+"South Africa - units unclear",4.342,257541
+"Ghana - units unclear",4.166,129461
+"Ecuador - samples tested",3.75,66160
+"Ukraine - units unclear",3.196,139759
+"Taiwan - tests performed",2.727,64958
 "Vietnam - units unclear",2.681,261004
-"Colombia - samples processed",2.335,118801
+"Colombia - samples processed",2.418,123029
+"Japan - tests performed",2.24,283306
 "Rwanda - units unclear",2.22,28754
-"Japan - tests performed",2.165,273854
-"Tunisia - units unclear",2.065,24406
-"Costa Rica - people tested",1.907,9713
-"United States - specimens tested (CDC)",1.666,551541
-"Paraguay - samples tested",1.555,11091
-"Japan - people tested",1.459,184586
+"Tunisia - units unclear",2.103,24853
+"Costa Rica - people tested",1.942,9892
+"United States - specimens tested (CDC)",1.76,582512
+"Paraguay - samples tested",1.668,11898
+"Japan - people tested",1.473,186343
 "Argentina - tests performed",1.298,58685
-"Thailand - people tested",1.128,78768
-"Philippines - people tested",1.034,113333
+"Thailand - people tested",1.184,82627
+"Philippines - people tested",1.091,119512
+"Pakistan - tests performed",1.007,222404
 "Morocco - people tested",1.003,37006
-"Pakistan - tests performed",0.962,212511
-"Senegal - tests performed",0.93,15577
-"Uganda - samples tested",0.857,39216
-"Zimbabwe - tests performed",0.784,11647
-"India - samples tested",0.758,1046450
-"Bolivia - cases tested",0.658,7680
-"Mexico - cases tested",0.645,83175
-"Bangladesh - samples tested",0.533,87698
-"Nepal - people tested",0.461,13424
-"Kenya - units unclear",0.442,23780
+"Senegal - tests performed",0.972,16279
+"Uganda - samples tested",0.906,41462
+"Zimbabwe - tests performed",0.897,13329
+"India - samples tested",0.864,1191946
+"Mexico - cases tested",0.674,86898
+"Bolivia - cases tested",0.665,7767
+"Bangladesh - samples tested",0.567,93403
+"Kenya - units unclear",0.481,25869
+"Nepal - people tested",0.468,13640
 "India - people tested",0.381,525667
-"Indonesia - people tested",0.315,86061
+"Indonesia - people tested",0.325,88924
 "Ethiopia - tests performed",0.21,24088
-"Myanmar - samples tested",0.162,8794
-"Nigeria - samples tested",0.09,18536
+"Myanmar - samples tested",0.166,9038
+"Nigeria - samples tested",0.095,19512

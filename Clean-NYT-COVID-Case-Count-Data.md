@@ -127,6 +127,7 @@ tests <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/p
 
     ## Parsed with column specification:
     ## cols(
+    ##   `ISO code` = col_character(),
     ##   Entity = col_character(),
     ##   Date = col_date(format = ""),
     ##   `Source URL` = col_character(),
