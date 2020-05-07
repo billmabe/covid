@@ -245,7 +245,7 @@ country_df <- country_df %>% mutate(latitude = as.numeric(latitude),
 ```{r}
 test_loc <- inner_join(test_output, country_df, by = c("Country" = "name"))
 anti_join(test_output, country_df, by = c("Country" = "name"))
-# Myanmar has a different name across the two data sets. Will fix later.
+# Myanmar has a different name across the two data sets and is therefore dropped in the join. Will fix later.
 
 # nrow(test_loc)
 # nrow(test_output)
