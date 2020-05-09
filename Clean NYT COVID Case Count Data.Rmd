@@ -27,7 +27,7 @@ The purpose of this script is to produce two working data frames:
 
 ## A. READ COVID-19 CASE AND DEATH DATA
 
-```{r}
+```{r, messages = FALSE, echo = FALSE, include = FALSE}
 require(readr)
 require(dplyr)
 require(tidyr)
