@@ -287,12 +287,25 @@ qpal2 <- colorQuantile("Reds", test_loc$`Log Tests per 1,000`, 5)
 
 # Write csv files to save
 
-```{r}
+```{r, echo = FALSE, include = FALSE}
 write.csv(county_data, file = here("county_data.csv"), row.names = FALSE)
 write.csv(state_data, file = here("state_data.csv"), row.names = FALSE)
-write.csv(county_data, file = "~/Documents/Projects/covid_app/county_data.csv", row.names = FALSE)
-write.csv(state_data, file = "~/Documents/Projects/covid_app/state_data.csv", row.names = FALSE)
 write.csv(test_loc, file = here("test_output.csv"), row.names = FALSE)
-write.csv(test_loc, file = "~/Documents/Projects/covid_app/test_output.csv", row.names = FALSE)
+```
+
+```{r deploy}
+require(devtools)
+
+if (!require("htmltools"))
+  install.packages("htmltools")
+require(htmltools)
+
+#devtools::install_github("rstudio/rsconnect")
+require(rsconnect)
+
+rsconnect::setAccountInfo(name='practicaldatalab',
+			  token='3C7505F0863F43351B605EBDEA791D0F',
+			  secret='v0VflFTDtN17aZNlpK8/r9DWDiL8aVqOz2GmO1P/')
+deployApp("~/Documents/GitHub/covid/", account = 'practicaldatalab')
 ```
 
