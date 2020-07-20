@@ -5184,11 +5184,11 @@ summary {
 table(county_distinct_cumul$cases_is_cumulative)</code></pre>
 <pre><code>## 
 ##      0      1 
-##   4896 253105</code></pre>
+##   6513 340625</code></pre>
 <pre class="r"><code>table(county_distinct_cumul$dth_is_cumulative)</code></pre>
 <pre><code>## 
 ##      0      1 
-##   1013 256988</code></pre>
+##   1313 345825</code></pre>
 </div>
 <div id="state-data" class="section level4">
 <h4>2. State Data</h4>
@@ -5202,11 +5202,11 @@ table(county_distinct_cumul$cases_is_cumulative)</code></pre>
 table(state_distinct_cumul$cases_is_cumulative)</code></pre>
 <pre><code>## 
 ##    0    1 
-##    7 6112</code></pre>
+##    8 7596</code></pre>
 <pre class="r"><code>table(state_distinct_cumul$dth_is_cumulative)</code></pre>
 <pre><code>## 
 ##    0    1 
-##    8 6111</code></pre>
+##   14 7590</code></pre>
 <p>The tables show that in both data sets, the cases and deaths variables are cumulative counts. In a very small number of cases, however, the number of cases at time t is LESS than the number of cases at time t - 1. This suggests that perhaps the local area revised the case or death counts since the original report. To accommodate this and to avoid ending up with daily case values below zero, I use the lead function to change the values of cases and deaths, when the future values of those variables (in the next two days only) were LESS than the current values of those variables. This is intended to improve the accuracy of the daily counts and to backwards revise the cumulative counts so that they reflect changes that local health authorities made to revise the case and death counts. Of course, this assumes that more recent data are more accurate than the original reports. This assumption could be wrong. I think this is, however, a reasonable assumption that also has the benefit of generating negative numbers of COVID-19 cases for some days.</p>
 </div>
 </div>
@@ -5261,14 +5261,14 @@ state_complete &lt;- state_distinct_rev %&gt;%
 table(gaps1$no_gap)</code></pre>
 <pre><code>## 
 ##      1 
-## 258777</code></pre>
+## 348252</code></pre>
 <pre class="r"><code>gaps2 &lt;- state_complete %&gt;% 
             group_by(state) %&gt;% 
             mutate(no_gap = date - lag(date))
 table(gaps2$no_gap)</code></pre>
 <pre><code>## 
 ##    1 
-## 6119</code></pre>
+## 7604</code></pre>
 <p>If they all equal 1 means there are no gaps in the time series.</p>
 </div>
 </div>
@@ -5322,7 +5322,7 @@ test_output &lt;- tests %&gt;%
   arrange(desc(`Cumulative total per thousand`)) %&gt;% 
   select(Country, `Test Units`, Date, `Cumulative total per thousand`, `Cumulative total`, `Log Tests per 1,000`)
 nrow(test_output)</code></pre>
-<pre><code>## [1] 87</code></pre>
+<pre><code>## [1] 92</code></pre>
 </div>
 <div id="latitude-longitude-data" class="section level1">
 <h1>LATITUDE / LONGITUDE DATA</h1>
@@ -5355,11 +5355,19 @@ country_df &lt;- country_df %&gt;% mutate(latitude = as.numeric(latitude),
 <h1>Join Testing Data with Lat Lon Data</h1>
 <pre class="r"><code>test_loc &lt;- inner_join(test_output, country_df, by = c(&quot;Country&quot; = &quot;name&quot;))
 anti_join(test_output, country_df, by = c(&quot;Country&quot; = &quot;name&quot;))</code></pre>
-<pre><code>## # A tibble: 1 x 6
-## # Groups:   Country [1]
+<pre><code>## Warning: `...` is not empty.
+## 
+## We detected these problematic arguments:
+## * `needs_dots`
+## 
+## These dots only exist to allow future extensions and should be empty.
+## Did you misspecify an argument?</code></pre>
+<pre><code>## # A tibble: 2 x 6
+## # Groups:   Country [2]
 ##   Country `Test Units` Date       `Cumulative tot… `Cumulative tot…
 ##   &lt;chr&gt;   &lt;chr&gt;        &lt;date&gt;                &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Myanmar samples tes… 2020-06-16             1.02            55412
+## 1 Myanmar samples tes… 2020-07-13             1.74            94872
+## 2 Democr… samples tes… 2020-07-16            NA                  NA
 ## # … with 1 more variable: `Log Tests per 1,000` &lt;dbl&gt;</code></pre>
 <pre class="r"><code># Myanmar has a different name across the two data sets and is therefore dropped in the join. Will fix later.
 
@@ -5397,8 +5405,8 @@ anti_join(test_output, country_df, by = c(&quot;Country&quot; = &quot;name&quot;
 <pre><code>## Warning in pal(mids): Some values were outside the color scale and will be
 ## treated as NA</code></pre>
 <pre class="r"><code>  map</code></pre>
-<div id="htmlwidget-c5a3e19844bba3f7a28b" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c5a3e19844bba3f7a28b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addLegend","args":[{"colors":["#FB6A4A","#808080","#808080","#808080","#808080"],"labels":["<span title=\"0.539 &ndash; 4.917\">0% &ndash; 20%<\/span>","<span title=\"4.917 &ndash; 16.321\">20% &ndash; 40%<\/span>","<span title=\"16.321 &ndash; 40.702\">40% &ndash; 60%<\/span>","<span title=\"40.702 &ndash; 73.706\">60% &ndash; 80%<\/span>","<span title=\"73.706 &ndash; 276.454\">80% &ndash; 100%<\/span>"],"na_color":"#808080","na_label":"NA","opacity":0.5,"position":"topright","type":"quantile","title":"Total COVID-19 Tests to Date","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addProviderTiles","args":["Stamen.Toner",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.930414,49.815273,64.963051,56.26392,55.169438,61.52401,25.354826,39.399872,1.352083,53.709807,31.046051,29.31166,41.87194,37.09024,53.41291,58.595272,50.503887,-25.274398,56.879635,-40.900557,40.463667,3.202778,48.019573,56.130366,55.378051,47.516231,51.165691,46.818188,60.472024,44.016521,-35.675147,49.817492,46.151241,61.92411,22.396428,60.128161,48.669026,23.885942,51.919438,38.963745,45.943161,52.132633,39.074208,47.162494,8.537981,35.907757,-30.559482,4.210484,13.794185,45.1,42.733883,32.427908,-32.522779,31.791702,21.521757,48.379433,46.227638,4.570868,7.946527,-1.940278,-23.442503,15.870032,-9.189967,-38.416097,33.886917,-1.831239,9.748917,20.593684,30.375321,36.204824,12.879721,28.394857,-16.290154,14.497401,23.684994,23.634501,23.69781,1.373333,14.058324,-14.235004,-0.023559,9.145,-19.015438,-0.789275,9.081999,21.512583],[50.637772,6.129583,-19.020835,9.501785,23.881275,105.318756,51.183884,-8.224454,103.819836,27.953389,34.851612,47.481766,12.56738,-95.712891,-8.24389,25.013607,4.469936,133.775136,24.603189,174.885971,-3.74922,73.22068,66.923684,-106.346771,-3.435973,14.550072,10.451526,8.227512,8.468946,21.005859,-71.542969,15.472962,14.995463,25.748151,114.109497,18.643501,19.699024,45.079162,19.145136,35.243322,24.96676,5.291266,21.824312,19.503304,-80.782127,127.766922,22.937506,101.975766,-88.89653,15.2,25.48583,53.688046,-55.765835,-7.09262,-77.781167,31.16558,2.213749,-74.297333,-1.023194,29.873888,-58.443832,100.992541,-75.015152,-63.616672,9.537499,-78.183406,-83.753428,78.96288,69.345116,138.252924,121.774017,84.124008,-63.588653,-14.452362,90.356331,-102.552784,120.960515,32.290275,108.277199,-51.92528,37.906193,40.489673,29.154857,113.921327,8.675277,55.923255],[5.62204444184186,5.43897021629517,5.22737438053747,4.99682030506253,4.96584711130612,4.75771958444838,4.70293190377059,4.63172447920934,4.58993471334531,4.49003987873446,4.472666836175,4.40450949047594,4.40388596902678,4.38528382426775,4.36039433454677,4.35143855290586,4.30720879523937,4.29829170245395,4.29167787663649,4.2589829108303,4.25383808645985,4.23928149699311,4.18954867579554,4.14521193258356,4.13523055469444,4.12679561799259,4.09487775338376,4.07186034266911,4.0222576233272,3.90116426209327,3.8991606387112,3.87809386716506,3.79988401215685,3.72591027119418,3.69297107201719,3.63505664741643,3.6091596109807,3.58006854825576,3.55214293054047,3.53924771514264,3.48299239929727,3.36570836373185,3.28683349405143,3.18618733024467,3.11400407863203,3.10995341764401,3.08241442968972,3.04471289577561,3.00305539393377,2.86180080090813,2.81690460601429,2.75461567024953,2.75270484164264,2.61732283746925,2.57550879447028,2.55552042911599,2.54427558159483,2.44347683169153,2.13853558098754,2.03692540457676,1.97060276164568,1.90285351673364,1.86097453824953,1.76729599704968,1.7409923521744,1.71036863101254,1.65057985576528,1.5959473222516,1.57918486926308,1.56234630490025,1.55772347674742,1.52126222153038,1.50829073042914,1.41609585235668,1.21342796309669,1.14676733055516,1.14294810248816,1.12232881528543,0.986189859253822,0.825052251439884,0.818898385865506,0.611394678687686,0.531804030151182,0.33718626735487,-0.61803970807314,null],null,null,{"interactive":true,"className":"","stroke":true,"color":["#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#808080"],"weight":10,"opacity":1,"fill":true,"fillColor":["#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#808080"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[-100,-140],"textsize":"10px","textOnly":true,"style":{"background":"rgba(255,255,255,0.95)","border-color":"rgba(0,0,0,1)","border-radius":"4px","border-style":"solid","border-width":"4px"},"className":"","sticky":true},null]}],"limits":{"lat":[-40.900557,64.963051],"lng":[-106.346771,174.885971]},"setView":[[40.79,-73.93],1,[]]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d33431343e54293686b7" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d33431343e54293686b7">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addLegend","args":[{"colors":["#A50F15","#808080","#808080","#808080","#808080"],"labels":["<span title=\"1.001 &ndash; 8.891\">0% &ndash; 20%<\/span>","<span title=\"8.891 &ndash; 26.096\">20% &ndash; 40%<\/span>","<span title=\"26.096 &ndash; 59.032\">40% &ndash; 60%<\/span>","<span title=\"59.032 &ndash; 109.347\">60% &ndash; 80%<\/span>","<span title=\"109.347 &ndash; 520.373\">80% &ndash; 100%<\/span>"],"na_color":"#808080","na_label":"NA","opacity":0.5,"position":"topright","type":"quantile","title":"Total COVID-19 Tests to Date","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addProviderTiles","args":["Stamen.Toner",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[49.815273,23.424076,25.930414,35.937496,56.26392,64.963051,55.169438,1.352083,61.52401,25.354826,31.046051,37.09024,39.399872,53.709807,-25.274398,3.202778,55.378051,53.41291,29.31166,41.87194,50.503887,56.879635,48.019573,-40.900557,56.130366,58.595272,46.818188,47.516231,40.463667,51.165691,44.016521,23.885942,-35.675147,60.472024,60.128161,22.396428,46.151241,49.817492,61.92411,51.919438,38.963745,45.943161,52.132633,48.669026,8.537981,-30.559482,39.074208,47.162494,13.794185,42.733883,35.907757,4.210484,31.791702,32.427908,45.1,-32.522779,4.570868,48.379433,21.521757,-1.940278,-23.442503,46.227638,-38.416097,7.946527,9.748917,28.394857,20.593684,-9.189967,-16.290154,12.879721,15.870032,-1.831239,30.375321,-14.235004,36.204824,-16.578193,23.684994,33.886917,14.497401,23.634501,8.619543,-0.023559,23.69781,14.058324,-0.789275,-19.015438,9.145,9.081999,21.512583,1.373333],[6.129583,53.847818,50.637772,14.375416,9.501785,-19.020835,23.881275,103.819836,105.318756,51.183884,34.851612,-95.712891,-8.224454,27.953389,133.775136,73.22068,-3.435973,-8.24389,47.481766,12.56738,4.469936,24.603189,66.923684,174.885971,-106.346771,25.013607,8.227512,14.550072,-3.74922,10.451526,21.005859,45.079162,-71.542969,8.468946,18.643501,114.109497,14.995463,15.472962,25.748151,19.145136,35.243322,24.96676,5.291266,19.699024,-80.782127,22.937506,21.824312,19.503304,-88.89653,25.48583,127.766922,101.975766,-7.09262,53.688046,15.2,-55.765835,-74.297333,31.16558,-77.781167,29.873888,-58.443832,2.213749,-63.616672,-1.023194,-83.753428,84.124008,78.96288,-75.015152,-63.588653,121.774017,100.992541,-78.183406,69.345116,-51.92528,138.252924,179.414413,90.356331,9.537499,-14.452362,-102.552784,0.824782,37.906193,120.960515,108.277199,113.921327,29.154857,40.489673,8.675277,55.923255,32.290275],[6.25454586212558,6.11160923630846,6.03467249298118,5.50472566137052,5.40016070418043,5.30213506983623,5.16419722921879,5.15073920697834,5.13046660098254,5.02631833643144,4.98591218104075,4.96242496179183,4.89329216166826,4.821273009446,4.82036220751468,4.80178904748287,4.72570498761683,4.71432051123699,4.66408039786681,4.62289221897571,4.56274273674814,4.55636852175253,4.52760856453971,4.5160875745635,4.51185900684993,4.45606674738235,4.42409185606725,4.41288313822605,4.41083272651555,4.40880244176073,4.36370990288798,4.31843433239668,4.27246285321374,4.22794261929117,4.08087086493023,4.07738488989707,4.05610603323466,4.04939949617893,4.01116220879267,3.93529021236649,3.90588420146874,3.8929625026894,3.79755447073959,3.78239256561238,3.70204244064022,3.68917940912293,3.65410683351268,3.4208365969145,3.41427812120069,3.36660593689254,3.33341805924087,3.3075458255807,3.27230284125105,3.21847574484686,3.21454646670697,3.17086135976644,3.12627796340063,2.98416563718253,2.96985020383989,2.66813057710097,2.56194484844124,2.54427558159483,2.46521401644226,2.39825884306233,2.35764129874212,2.34439859580746,2.27572763882416,2.25957320240075,2.25328980126917,2.22516394602546,2.15732808033691,2.14265105507772,2.04018082772653,1.9397483469415,1.91751067453362,1.89054843950284,1.76951386028074,1.75128463666234,1.73430689447997,1.69726562279962,1.50806941804581,1.41439579123077,1.20237152295896,0.986189859253822,0.935308737709917,0.920681080175448,0.779324876800998,0.000999500333083423,null,null],null,null,{"interactive":true,"className":"","stroke":true,"color":["#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#808080","#808080"],"weight":10,"opacity":1,"fill":true,"fillColor":["#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#A50F15","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#DE2D26","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FB6A4A","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FCAE91","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#FEE5D9","#808080","#808080"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[-100,-140],"textsize":"10px","textOnly":true,"style":{"background":"rgba(255,255,255,0.95)","border-color":"rgba(0,0,0,1)","border-radius":"4px","border-style":"solid","border-width":"4px"},"className":"","sticky":true},null]}],"limits":{"lat":[-40.900557,64.963051],"lng":[-106.346771,179.414413]},"setView":[[40.79,-73.93],1,[]]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="write-csv-files-to-save" class="section level1">
 <h1>Write csv files to save</h1>
@@ -5424,17 +5432,18 @@ require(rsconnect)</code></pre>
 deployApp(&quot;~/Documents/GitHub/covid/&quot;, account = &#39;practicaldatalab&#39;)</code></pre>
 <pre><code>## Preparing to deploy application...DONE
 ## Uploading bundle for application: 1955617...DONE
-## Deploying bundle: 3306711 for application: 1955617 ...
-## Waiting for task: 751434004
+## Deploying bundle: 3413112 for application: 1955617 ...
+## Waiting for task: 764297705
+##   building: Processing bundle: 3413112
 ##   building: Parsing manifest
-##   building: Building image: 3700605
+##   building: Building image: 3820850
 ##   building: Fetching packages
 ##   building: Installing packages
 ##   building: Installing files
-##   building: Pushing image: 3700605
+##   building: Pushing image: 3820850
 ##   deploying: Starting instances
 ##   rollforward: Activating new instances
-##   unstaging: Stopping old instances
+##   terminating: Stopping old instances
 ## Application successfully deployed to https://practicaldatalab.shinyapps.io/covid/</code></pre>
 </div>
 
